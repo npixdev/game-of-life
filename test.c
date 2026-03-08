@@ -20,8 +20,12 @@ int game(int table[20][20], int new_table[20][20]) {
                     if (di == 0 && dj == 0) {
                         continue;
                     }
-                    if (table[i+di][j+dj] == 1) {
-                        count++;
+                    int ni = i + di;
+                    int nj = j + dj;
+                    if (ni >= 0 && ni < 20 && nj >= 0 && nj < 20) {
+                        if (table[ni][nj] == 1) {
+                            count++;
+                        }
                     }
                 }
             }
