@@ -44,12 +44,11 @@ int game(int table[SIZE][SIZE], int new_table[SIZE][SIZE]) {
                     if (di == 0 && dj == 0) {
                         continue;
                     }
-                    int ni = i + di;
-                    int nj = j + dj;
-                    if (ni >= 0 && ni < SIZE && nj >= 0 && nj < SIZE) {
-                        if (table[ni][nj] == 1) {
-                            count++;
-                        }
+                    int ni = (i + di + SIZE) % SIZE;
+                    int nj = (j + dj + SIZE) % SIZE;
+
+                    if (table[ni][nj] == 1) {
+                        count++;
                     }
                 }
             }
