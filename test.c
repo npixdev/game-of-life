@@ -1,5 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
+#include <Windows.h>
 
 int random_table(int table[20][20]) {
     for (int i = 0; i < 20; i++) {
@@ -49,8 +50,16 @@ int main() {
     int table[20][20] = {0};
     int new_table[20][20] = {0};
     random_table(table);
-    game(table, new_table);
-    print_table(new_table);
+    while (1) {
+        game(table, new_table);
+        print_table(new_table);
+        for (int i = 0; i < 20; i++) {
+            for (int j = 0; j < 20; j++) {
+                table[i][j] = new_table[i][j];
+            }
+        }
+        Sleep(1000);
+    }
     return 0;
 }
 
