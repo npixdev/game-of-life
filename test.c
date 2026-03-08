@@ -25,10 +25,10 @@ int game(int table[20][20], int new_table[20][20]) {
                     }
                 }
             }
-            if (table[i][j] == 1 && count == 2  || count ==3) {
+            if (table[i][j] == 1 && (count == 2  || count ==3)) {
                 new_table[i][j] = 1;
-            } else if (table[i][j] == 1 && count <2 || count > 3) {
-                new_table[i][j] == 0;
+            } else if (table[i][j] == 1 && (count <2 || count > 3)) {
+                new_table[i][j] = 0;
             } else if (table[i][j] == 0 && count == 3) {
                 new_table[i][j] = 1;
             }
@@ -56,6 +56,9 @@ int main() {
         for (int i = 0; i < 20; i++) {
             for (int j = 0; j < 20; j++) {
                 table[i][j] = new_table[i][j];
+            }
+            for (int j = 0; j < 20; j++) {
+                new_table[i][j] = 0;
             }
         }
         Sleep(1000);
