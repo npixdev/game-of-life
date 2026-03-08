@@ -89,8 +89,16 @@ int main() {
     } else {
         load_table(table, "glide.txt");
     }
+
+    HANDLE consoleHandle = GetStdHandle(STD_OUTPUT_HANDLE);
+    CONSOLE_CURSOR_INFO info;
+    info.dwSize = 100;
+    info.bVisible = FALSE;
+    SetConsoleCursorInfo(consoleHandle, &info);
+
     while(1) {
-        system("cls");
+        COORD coord = {0, 0};
+        SetConsoleCursorPosition(consoleHandle, coord);
         print_table(table);
         game(table, new_table);
         for (int i = 0; i < SIZE; i++) {
