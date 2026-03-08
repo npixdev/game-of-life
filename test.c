@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <Windows.h>
-#define SIZE 20
+#define SIZE 5
 
 int random_table(int table[SIZE][SIZE]) {
     for (int i = 0; i < SIZE; i++) {
@@ -9,6 +9,21 @@ int random_table(int table[SIZE][SIZE]) {
             table[i][j] = rand() % 2;
         }
     }
+    return 0;
+}
+
+int load_table(int table[SIZE][SIZE], const char* filename) {
+    FILE* file = fopen(filename, "r");
+    if (file == NULL) {
+        printf("Error opening file: %s\n", filename);
+        return -1;
+    }
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
+            fscanf(file, "%d", &table[i][j]); 
+        }
+    }
+    fclose(file);
     return 0;
 }
 
@@ -44,7 +59,11 @@ int game(int table[SIZE][SIZE], int new_table[SIZE][SIZE]) {
 int print_table(int table[SIZE][SIZE]) {
     for (int i = 0; i < SIZE; i++) {
         for (int j = 0; j < SIZE; j++) {
-            printf("%d ", table[i][j]);
+            if (table[i][j] == 1) {
+                printf("O ");
+            } else {
+                printf("  ");
+            }
         }
         printf("\n");
     }
@@ -54,21 +73,8 @@ int print_table(int table[SIZE][SIZE]) {
 int main() {
     int table[SIZE][SIZE] = {0};
     int new_table[SIZE][SIZE] = {0};
-    random_table(table);
-    while (1) {
-        system("cls");
-        game(table, new_table);
-        print_table(new_table);
-        for (int i = 0; i < SIZE; i++) {
-            for (int j = 0; j < SIZE; j++) {
-                table[i][j] = new_table[i][j];
-            }
-            for (int j = 0; j < SIZE; j++) {
-                new_table[i][j] = 0;
-            }
-        }
-        Sleep(1000);
-    }
+    load_table(table, "config.txt");
+    print_table(table);
     return 0;
 }
 
