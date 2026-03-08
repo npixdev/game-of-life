@@ -1,7 +1,7 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <Windows.h>
-#define SIZE 5
+#define SIZE 20
 
 int random_table(int table[SIZE][SIZE]) {
     for (int i = 0; i < SIZE; i++) {
@@ -19,8 +19,16 @@ int load_table(int table[SIZE][SIZE], const char* filename) {
         return -1;
     }
     for (int i = 0; i < SIZE; i++) {
+         for (int j = 0; j < SIZE; j++) {
+            table[i][j] = 0;
+        }
+    }
+    for (int i = 0; i < SIZE; i++) {
         for (int j = 0; j < SIZE; j++) {
-            fscanf(file, "%d", &table[i][j]); 
+            if (fscanf(file, "%d", &table[i][j]) != 1) {
+                fclose(file);
+                return 0;
+            }
         }
     }
     fclose(file);
@@ -74,7 +82,18 @@ int main() {
     int table[SIZE][SIZE] = {0};
     int new_table[SIZE][SIZE] = {0};
     load_table(table, "config.txt");
-    print_table(table);
+    while(1) {
+        system("cls");
+        print_table(table);
+        game(table, new_table);
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
+                table[i][j] = new_table[i][j];
+                new_table[i][j] = 0;
+            }
+        }
+        Sleep(1000);
+    }
     return 0;
 }
 
