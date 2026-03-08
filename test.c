@@ -1,19 +1,20 @@
 #include <stdio.h>
 #include <stdlib.h>
 #include <Windows.h>
+#define SIZE 20
 
-int random_table(int table[20][20]) {
-    for (int i = 0; i < 20; i++) {
-        for (int j = 0; j < 20; j++) {
+int random_table(int table[SIZE][SIZE]) {
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
             table[i][j] = rand() % 2;
         }
     }
     return 0;
 }
 
-int game(int table[20][20], int new_table[20][20]) {
-    for (int i = 0; i < 20; i++) {
-        for (int j = 0; j < 20; j++) {
+int game(int table[SIZE][SIZE], int new_table[SIZE][SIZE]) {
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
             int count = 0;
             for (int di = -1; di < 2; di++) {
                 for (int dj = -1; dj <2; dj++) {
@@ -22,7 +23,7 @@ int game(int table[20][20], int new_table[20][20]) {
                     }
                     int ni = i + di;
                     int nj = j + dj;
-                    if (ni >= 0 && ni < 20 && nj >= 0 && nj < 20) {
+                    if (ni >= 0 && ni < SIZE && nj >= 0 && nj < SIZE) {
                         if (table[ni][nj] == 1) {
                             count++;
                         }
@@ -40,9 +41,9 @@ int game(int table[20][20], int new_table[20][20]) {
     }
 }
 
-int print_table(int table[20][20]) {
-    for (int i = 0; i < 20; i++) {
-        for (int j = 0; j < 20; j++) {
+int print_table(int table[SIZE][SIZE]) {
+    for (int i = 0; i < SIZE; i++) {
+        for (int j = 0; j < SIZE; j++) {
             printf("%d ", table[i][j]);
         }
         printf("\n");
@@ -51,17 +52,18 @@ int print_table(int table[20][20]) {
 }
 
 int main() {
-    int table[20][20] = {0};
-    int new_table[20][20] = {0};
+    int table[SIZE][SIZE] = {0};
+    int new_table[SIZE][SIZE] = {0};
     random_table(table);
     while (1) {
+        system("cls");
         game(table, new_table);
         print_table(new_table);
-        for (int i = 0; i < 20; i++) {
-            for (int j = 0; j < 20; j++) {
+        for (int i = 0; i < SIZE; i++) {
+            for (int j = 0; j < SIZE; j++) {
                 table[i][j] = new_table[i][j];
             }
-            for (int j = 0; j < 20; j++) {
+            for (int j = 0; j < SIZE; j++) {
                 new_table[i][j] = 0;
             }
         }
