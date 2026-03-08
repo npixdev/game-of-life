@@ -68,7 +68,7 @@ int print_table(int table[SIZE][SIZE]) {
     for (int i = 0; i < SIZE; i++) {
         for (int j = 0; j < SIZE; j++) {
             if (table[i][j] == 1) {
-                printf("O ");
+                printf("%c%c", 219, 219);
             } else {
                 printf("  ");
             }
@@ -79,7 +79,6 @@ int print_table(int table[SIZE][SIZE]) {
 }
 
 int main() {
-    system("color 0A");
     int table[SIZE][SIZE] = {0};
     int new_table[SIZE][SIZE] = {0};
     printf("Choose an option:\n1. Random table\n2. Load table from file\n");
