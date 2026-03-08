@@ -10,10 +10,7 @@ int random_table(int table[20][20]) {
     return 0;
 }
 
-int main() {
-    int table[20][20] = {0};
-    int new_table[20][20] = {0};
-    random_table(table);
+int game(int table[20][20], int new_table[20][20]) {
     for (int i = 0; i < 20; i++) {
         for (int j = 0; j < 20; j++) {
             int count = 0;
@@ -36,13 +33,24 @@ int main() {
             }
         }
     }
+}
 
+int print_table(int table[20][20]) {
     for (int i = 0; i < 20; i++) {
         for (int j = 0; j < 20; j++) {
-            printf("%d ", new_table[i][j]);
+            printf("%d ", table[i][j]);
         }
         printf("\n");
     }
+    return 0;
+}
+
+int main() {
+    int table[20][20] = {0};
+    int new_table[20][20] = {0};
+    random_table(table);
+    game(table, new_table);
+    print_table(new_table);
     return 0;
 }
 
