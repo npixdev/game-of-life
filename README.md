@@ -1,0 +1,9 @@
+Conway's Game of Life - C ImplementationA high-performance, terminal-based implementation of Conway's Game of Life written in C. This project focuses on efficient memory management, low-level system optimization, and mathematical grid logic.🚀 Key FeaturesDynamic Memory Management: Utilizes heap allocation (malloc/free) to handle arbitrary grid sizes defined at runtime, moving away from static compile-time constraints.Torus World Logic: Implements modular arithmetic to create a seamless, wrapping universe. Cells exiting the boundary reappear on the opposite side, simulating a finite but unbounded plane.Win32 Console Optimization: High-speed rendering using the SetConsoleCursorPosition API to eliminate screen flickering common with standard buffer clearing commands.Double Buffering Pattern: Employs two discrete state matrices (Current and Next) to ensure calculation integrity during generational transitions.🛠️ Technical Deep DiveMemory ArchitectureThe grid is implemented as a pointer-to-pointer (int**), allowing for a flexible 2D array structure. This architecture ensures that memory usage is optimized based on the input configuration file.C// Dynamic 2D array allocation
+int** table = (int**)malloc(rows * sizeof(int*));
+for (int i = 0; i < rows; i++) {
+    table[i] = (int*)malloc(cols * sizeof(int));
+}
+Boundary PhysicsTo avoid "edge death" and simulate an infinite space within a finite grid, the neighbor counting algorithm uses the modulo operator:$$ni = (i + di + rows) \pmod{rows}$$$$nj = (j + dj + cols) \pmod{cols}$$📖 Usage InstructionsCompile: Use any C compiler (e.g., GCC):Bashgcc life.c -o life.exe
+Configuration: Create or edit glide.txt. The first line must contain the dimensions:Plaintext20 20
+0 1 0 0 ...
+Run: Execute life.exe and select the "Load" option from the menu.
