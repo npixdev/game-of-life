@@ -79,9 +79,17 @@ int print_table(int table[SIZE][SIZE]) {
 }
 
 int main() {
+    system("color 0A");
     int table[SIZE][SIZE] = {0};
     int new_table[SIZE][SIZE] = {0};
-    load_table(table, "config.txt");
+    printf("Choose an option:\n1. Random table\n2. Load table from file\n");
+    int choice;
+    scanf("%d", &choice);
+    if (choice == 1) {
+        random_table(table);
+    } else {
+        load_table(table, "glide.txt");
+    }
     while(1) {
         system("cls");
         print_table(table);
@@ -92,7 +100,7 @@ int main() {
                 new_table[i][j] = 0;
             }
         }
-        Sleep(1000);
+        Sleep(100);
     }
     return 0;
 }
